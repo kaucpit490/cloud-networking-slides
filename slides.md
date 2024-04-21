@@ -392,26 +392,38 @@ layout: center
 
 ---
 
-### Method 1: Assigning a public IP to the instance
-  - Create a **VNet/VPC** in a region
-  - Create a **subnet** within the VNet/VPC
-  - Create an **Internet Gateway** and attach it to the **VNet/VPC**
-  - Create a **route table** for the subnet and add a route with a destination of `0.0.0.0/0` for IPv4 traffic or `::/0` for IPv6 traffic, and a target/nextHop of the Internet gateway unique ID
-  - Add **security groups** to the subnet to allow the desired Internet traffic to flow to and from the instance
-  - Create a **VM instance** and place it in the subnet
-  - Assign a **public IPv4** address or an **IPv6 address** for the instance
+## How to get Internet Access
+<br>
 
-### Method 2: Without assigning a public IP to the instance
-  - Create a **NAT Gateway** or **NAT instance** and attach it to the **VNet/VPC**.
-  - Create a subnet within the VNet/VPC.
-  - Create a **route table** and add a route with a destination of `0.0.0.0/0` for IPv4 traffic or `::/0` for IPv6 traffic, and a target/nextHop of the NAT Gateway or NAT instance unique ID.
-  - Add **security groups** to the subnet to allow the desired Internet traffic to flow to and from the instance.
-  - Create a VM instance and place it in the subnet.
-  - The instance will be able to access the internet but won't be directly reachable from the internet.
+### Method 1: Assigning a public IP to the instance
+<br>
+
+- Create a **VNet/VPC** in a region
+- Create a **subnet** within the VNet/VPC
+- Create an **Internet Gateway** and attach it to the **VNet/VPC**
+- Create a **route table** for the subnet and add a route with a destination of `0.0.0.0/0` for IPv4 traffic or `::/0` for IPv6 traffic, and a target/nextHop of the Internet gateway unique ID
+- Add **security groups** to the subnet to allow the desired Internet traffic to flow to and from the instance
+- Create a **VM instance** and place it in the subnet
+- Assign a **public IPv4** address or an **IPv6 address** for the instance
 
 ---
 
-## NAT (Network Address Translation) Gateway
+## How to get Internet Access
+<br>
+
+### Method 2: Without assigning a public IP to the instance
+<br>
+
+- Create a **NAT Gateway** or **NAT instance** and attach it to the **VNet/VPC**.
+- Create a **subnet** within the VNet/VPC.
+- Create a **route table** and add a route with a destination of `0.0.0.0/0` for IPv4 traffic or `::/0` for IPv6 traffic, and a target/nextHop of the NAT Gateway or NAT instance unique ID.
+- Add **security groups** to the subnet to allow the desired Internet traffic to flow to and from the instance.
+- Create a **VM instance** and place it in the subnet.
+- The instance will be able to access the internet but won't be directly reachable from the internet.
+
+---
+
+## NAT Gateway
 - A NAT service that enables network traffic to flow in and out of a virtual network (VPC).
 - It's primarily used to enable outbound Internet access for resources in a private subnet.
 - It allows instances in a private subnet to connect to the Internet or services outside the VPC, but prevents and blocks incoming Internet connection from initiating a connection with those instances.
@@ -422,7 +434,7 @@ layout: center
 
 ---
 
-## NAT (Network Address Translation) Gateway Pricing
+## NAT Gateway Pricing
 - A NAT gateway is an Availability Zone scoped component, so it can only serve instances in the same AZ.
 - Most cloud providers charge an hourly basis for the duration that a NAT gateway is provisioned and in use.
   - AWS and Azure: $0.045/hour ~ $32 per month
@@ -534,7 +546,7 @@ layout: center
 ---
 
 ## Types of Load Balancers (I)
-![](images/load-balancer-network-osi-wh.svg)
+![](/images/load-balancer-network-osi-wh.svg)
 
 ---
 
