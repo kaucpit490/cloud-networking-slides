@@ -252,7 +252,7 @@ thead {
 
 ---
 
-## Subnets
+# Subnets
 
 - A subnet is a logical subdivision of an IP network that can be private or public.
 - Each subnet must be created in a single Availability Zone and cannot span zones.
@@ -266,7 +266,7 @@ thead {
 
 ---
 
-## Network Security Groups
+# Network Security Groups
 - Network security refers to the practice of safeguarding resources from unauthorized access or attacks
 - Securing the resources in the subnet is critical to prevent unauthorized access and mitigate threats
 - All systems that are not client-facing should be placed in private subnets
@@ -279,7 +279,7 @@ thead {
 
 ---
 
-## Routing and Peering
+# Routing and Peering
 - Without routing, network devices would be unable to route traffic to its destination and facilitate communication between subnets or networks.
 - Routing is the process of directing network traffic from one place to another through routing tables
 - Routing tables exist at the VNet/VPC level as well as the subnet level.
@@ -380,6 +380,28 @@ thead {
 - It's necessary for instances in a VNet/VPC that have a public IP address to send and receive traffic from the internet.
 
 ---
+
+## NAT Gateway
+- A NAT service that enables network traffic to flow in and out of a virtual network (VPC).
+- It's primarily used to enable outbound Internet access for resources in a private subnet.
+- It allows instances in a private subnet to connect to the Internet or services outside the VPC, but prevents and blocks incoming Internet connection from initiating a connection with those instances.
+- It is useful when instances in a private subnet need to reach the public Internet for software updates but do not want to be publicly accessible.
+- A NAT gateway can be public or private:
+  - A **public NAT gateway** enables instances in private subnets to connect to the internet through a public NAT gateway, but cannot accept unsolicited inbound connections from the internet.
+  - A **private NAT gateway** enables instances in private subnets to connect to other VPCs or your on-premises network through a private NAT gateway through a transit gateway or a virtual private gateway.
+
+---
+
+## NAT Gateway Pricing
+- A NAT gateway is an Availability Zone scoped component, so it can only serve instances in the same AZ.
+- Most cloud providers charge an hourly basis for the duration that a NAT gateway is provisioned and in use.
+  - AWS and Azure: $0.045/hour ~ $32 per month
+  - GCP charges based on the number of VM instances that are using the NAT gateway.
+- Additional costs are also applied for the data processed by the NAT gateway, typically for outbound data, also known as **egress** traffic.
+- Generally, there are no charges for inbound data, or **ingress** traffic, which is data entering the network from the internet.
+
+
+---
 layout: center
 ---
 
@@ -421,26 +443,6 @@ layout: center
 - Create a **VM instance** and place it in the subnet.
 - The instance will be able to access the internet but won't be directly reachable from the internet.
 
----
-
-## NAT Gateway
-- A NAT service that enables network traffic to flow in and out of a virtual network (VPC).
-- It's primarily used to enable outbound Internet access for resources in a private subnet.
-- It allows instances in a private subnet to connect to the Internet or services outside the VPC, but prevents and blocks incoming Internet connection from initiating a connection with those instances.
-- It is useful when instances in a private subnet need to reach the public Internet for software updates but do not want to be publicly accessible.
-- A NAT gateway can be public or private:
-  - A **public NAT gateway** enables instances in private subnets to connect to the internet through a public NAT gateway, but cannot accept unsolicited inbound connections from the internet.
-  - A **private NAT gateway** enables instances in private subnets to connect to other VPCs or your on-premises network through a private NAT gateway through a transit gateway or a virtual private gateway.
-
----
-
-## NAT Gateway Pricing
-- A NAT gateway is an Availability Zone scoped component, so it can only serve instances in the same AZ.
-- Most cloud providers charge an hourly basis for the duration that a NAT gateway is provisioned and in use.
-  - AWS and Azure: $0.045/hour ~ $32 per month
-  - GCP charges based on the number of VM instances that are using the NAT gateway.
-- Additional costs are also applied for the data processed by the NAT gateway, typically for outbound data, also known as **egress** traffic.
-- Generally, there are no charges for inbound data, or **ingress** traffic, which is data entering the network from the internet.
 
 ---
 
