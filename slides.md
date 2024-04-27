@@ -443,6 +443,105 @@ layout: center
 - Create a **VM instance** and place it in the subnet.
 - The instance will be able to access the internet but won't be directly reachable from the internet.
 
+---
+
+# Designing a Virtual Network (VNet/VPC)
+- We will take an example of creating a virtual network that contains three subnets:
+  - **Subnet for Load Balancers**. Servers that run HAProxy.
+  - **Subnet for Web Servers**.
+    Database tier: At this level, the solution includes the servers that are responsible for running the database.
+
+---
+
+# Virtual Private Network (VPN)
+- A Virtual Private Network (VPN) is a technology that uses tunneling protocols to provide a secure, encrypted connection over an untrusted network such as the Internet.
+- In addition to security groups, firewall, VPN is a crucial part of a comprehensive security strategy in cloud computing.
+- It provides secure, encrypted connections for remote access or site-to-site connectivity.
+- Limiting access to cloud resources via a VPN connection is a widely adopted practice.
+
+---
+layout: center
+---
+
+## Types of Virtual Private Network (VPN) Protocols (I)
+<br>
+
+1. **Point-to-Point Tunneling Protocol (PPTP)**
+2. **SSL-based VPNs**
+3. **IPsec-protocol based VPNs**
+
+---
+layout: center
+---
+
+## 1. Point-to-Point Tunneling Protocol (PPTP) VPN
+An insecure VPN protocol that uses a TCP control channel and a special type of tunnel (GRE) to wrap up PPP packets.
+  - PPTP isn't recommended to set up virtual private networks due to many well known security issues.
+
+
+
+
+---
+layout: center
+---
+
+## 2. SSL-based VPNs
+
+- traffic is encrypted with either the SSL or TLS protocol.
+  - SSL VPNs can be accessed directly from a web browser.
+  - It uses the same port (443) and protocol (HTTPS) that secure web traffic uses.
+  - There are two types of SSL VPNs: web-based and full tunnel
+- In web-based SSL VPN the secure connection is limited to the web session for that browser tab.
+    - This means other applications on the client would not use the VPN connection.
+- In full tunnel mode, all traffic from the client is sent over VPN.
+  - There are clients that support full tunnel mode such as Cisco AnyConnect VPN client and Microsoft SSTP
+
+
+
+---
+layout: center
+---
+
+## 3. IPsec-protocol based VPNs
+- IP Security (IPsec) is a suite of protocols that provide a secure connection between network, such as in a site-to-site VPN.
+- It provides data authentication, integrity, and confidentiality when data is transferred between communication points across IP networks.
+- IPsec protocols include the Authentication Header (AH), Encapsulating Security Payload (ESP), and Internet Key Exchange (IKE) protocols.
+- IPsec operates at the network layer (Layer 3) of the OSI model.
+- IPsec VPN uses security policies, which are rules to make traffic private between two points based on many parameters, such as the source and destination IP address and TCP/UDP ports.
+- IPsec protocols are known for strong security but notoriously difficult to configure and troubleshoot.
+
+---
+layout: center
+---
+
+## OpenVPN
+- OpenVPN is an open-source VPN protocol that can be configured to create either an SSL VPN or an IPsec VPN.
+- It belongs to the family of SSL/TLS VPNs.
+- OpenVPN can be configured to use either UDP or TCP
+  - UDP VPN is the default due to its efficiency.
+  - TCP VPN is more reliable, but slower and less efficient.
+- The default OpenVPN protocol is UDP port 1194 but it can be configured to use TLS over TCP (port 443).
+- It offers two types of VPN solutions: a routed VPN (tun) and a bridged VPN (tap).
+- It requires setting up a Public Key Infrastructure (PKI) because it uses TLS for key exchange and session setup.
+  - We will be configuring OpenVPN with PKI in [lab 7.](cpit490.gitlab.io/labs/lab-7/)
+
+---
+layout: center
+---
+
+## WireGuard
+- WireGuard is a modern, open-source VPN protocol designed for simplicity and performance.
+- WireGuard uses state-of-the-art cryptography 
+- It uses a simple and easy-to-audit code base, which enhances its security.
+  - WireGuard has about 4,000 lines of code compared to OpenVPN's 70,000.
+- WireGuard works by adding a network interface or many named wg0, wg1, etc., which acts as tunnel interfaces.
+- It uses public key cryptography for secure communication.
+- It links tunnel IP addresses with public keys and remote endpoints.
+- We will have an assignment on establishing our own WireGuard and IPsec VPN.
+
+
+
+
 
 ---
 
@@ -461,15 +560,6 @@ layout: center
   - We can't update our application, host OS, or configuration without downtime.
   - It is vulnerable to load spikes and attacks (e.g., DoS).
   - It will eventually become crippled when there's an overflow of requests.
-
-
----
-
-# Designing a Virtual Network (VNet/VPC)
-- We will take an example of creating a virtual network that contains three subnets:
-  - **Subnet for Load Balancers**. Servers that run HAProxy.
-  - **Subnet for Web Servers**.
-    Database tier: At this level, the solution includes the servers that are responsible for running the database.
 
 
 
