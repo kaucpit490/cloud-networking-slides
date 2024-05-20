@@ -56,25 +56,6 @@ hideInToc: true
 
 <Toc columns="2" maxDepth="1" mode="all" class="toc-list"/>
 
----
-
-# Table of Contents
-- Introduction to networking on the cloud
-- Networking Fundamentals
-- Virtual Private Cloud (VPC)
-- IP addressing and network interfaces
-- Subnets and routing
-- Security Groups (SG) and Network Access List (NACL)
-- NAT Gateways
-- Reverse Proxy
-- Load Balancing
-- VPNs
-- DNS
-- Content Delivery Network (CDN)
-- Web Application Firewall (WAF)
-- Hands-On Lab: setting up a cloud network
-
-
 
 ---
 
@@ -451,6 +432,16 @@ layout: center
   - **Subnet for Web Servers**.
     Database tier: At this level, the solution includes the servers that are responsible for running the database.
 
+
+---
+layout: full
+---
+
+<div style="width: 65%; margin: auto;">
+  <img src="/images/subnet-CIDR-blocks.svg" style="width: 100%;" />
+</div>
+
+
 ---
 
 # Virtual Private Network (VPN)
@@ -574,9 +565,11 @@ layout: center
 
 ---
 
+## Load Balancing (II)
+<div style="width: 70%; margin: auto;">
+    <img src="/public/images/load-balancer-diagram-dark.png" style="width: 100%;" />
+</div>
 
-# Load Balancing (II)
-![Load Balancer Diagram](/images/load-balancer-diagram-wh.png)
 
 ---
 
@@ -584,11 +577,8 @@ layout: center
 - A load balancer (LB) does not process incoming requests but routes them to other systems.
 - If a server is not responding, it will detect this problem, stop directing traffic to that server, and remove it from the server pool.
   - This is done through the "health-check" mechanism.
-
----
-
-## Load Balancing (IV)
 - Load balancers can be hardware-based or software-based.
+
 
 ---
 
